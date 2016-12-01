@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Trimmed schema ReusableAggregateBusinessInformationEntity_20p0.xsd - Only for use within FLUXMDRReturnMessage_5p0.xsd -->
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+            targetNamespace="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:20" version="20.0"
+            xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:20"
+            xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:20" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:20" schemaLocation="UnqualifiedDataType_20p0.xsd" />
+  <xsd:complexType name="DataSetVersionType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="ID" type="udt:IDType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="Name" type="udt:TextType" />
+      <xsd:element maxOccurs="1" minOccurs="1" name="ValidityStartDateTime" type="udt:DateTimeType" />
+      <xsd:element maxOccurs="1" minOccurs="1" name="ValidityEndDateTime" type="udt:DateTimeType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DelimitedPeriodType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="StartDateTime" type="udt:DateTimeType" />
+      <xsd:element minOccurs="0" name="EndDateTime" type="udt:DateTimeType" />
+      <xsd:element minOccurs="0" name="DurationMeasure" type="udt:MeasureType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FLUXBinaryFileType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="Title" type="udt:TextType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="IncludedBinaryObject" type="udt:BinaryObjectType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="Description" type="udt:TextType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="SizeMeasure" type="udt:MeasureType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="TypeCode" type="udt:CodeType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="Name" type="udt:TextType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FLUXPartyType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="1" name="ID" type="udt:IDType" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="Name" type="udt:TextType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FLUXResponseDocumentType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="1" name="ID" type="udt:IDType" />
+      <xsd:element maxOccurs="1" minOccurs="1" name="ReferencedID" type="udt:IDType" />
+      <xsd:element maxOccurs="1" minOccurs="1" name="CreationDateTime" type="udt:DateTimeType" />
+      <xsd:element maxOccurs="1" minOccurs="1" name="ResponseCode" type="udt:CodeType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="Remarks" type="udt:TextType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="RejectionReason" type="udt:TextType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="TypeCode" type="udt:CodeType" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="RelatedValidationResultDocument" type="ram:ValidationResultDocumentType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="RespondentFLUXParty" type="ram:FLUXPartyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MDRDataNodeType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="ID" type="udt:IDType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="ParentID" type="udt:IDType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="HierarchicalLevelNumeric" type="udt:NumericType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="EffectiveDelimitedPeriod" type="ram:DelimitedPeriodType" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="SubordinateMDRElementDataNode" type="ram:MDRElementDataNodeType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MDRDataSetType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="ID" type="udt:IDType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="Description" type="udt:TextType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="Origin" type="udt:TextType" />
+      <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="udt:TextType" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="SpecifiedDataSetVersion" type="ram:DataSetVersionType" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ContainedMDRDataNode" type="ram:MDRDataNodeType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MDRElementDataNodeType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="udt:TextType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="Value" type="udt:TextType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="TypeCode" type="udt:CodeType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="ValueFLUXBinaryFile" type="ram:FLUXBinaryFileType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ValidationQualityAnalysisType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="LevelCode" type="udt:CodeType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="TypeCode" type="udt:CodeType" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="Result" type="udt:TextType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="ID" type="udt:IDType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="Description" type="udt:TextType" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ReferencedItem" type="udt:TextType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ValidationResultDocumentType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="ValidatorID" type="udt:IDType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="CreationDateTime" type="udt:DateTimeType" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="RelatedValidationQualityAnalysis" type="ram:ValidationQualityAnalysisType" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

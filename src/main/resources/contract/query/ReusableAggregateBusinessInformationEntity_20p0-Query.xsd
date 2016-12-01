@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Trimmed schema ReusableAggregateBusinessInformationEntity_20p0.xsd - Only for use within FLUXMDRQueryMessage_5p0.xsd -->
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:20" version="20.0" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:20" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:20" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:20" schemaLocation="UnqualifiedDataType_20p0-Query.xsd" />
+  <xsd:complexType name="DelimitedPeriodType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="StartDateTime" type="udt:DateTimeType" />
+      <xsd:element minOccurs="0" name="EndDateTime" type="udt:DateTimeType" />
+      <xsd:element minOccurs="0" name="DurationMeasure" type="udt:MeasureType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FLUXPartyType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="1" name="ID" type="udt:IDType" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="Name" type="udt:TextType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MDRQueryIdentityType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="ID" type="udt:IDType" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ValidFromDateTime" type="udt:DateTimeType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="VersionID" type="udt:IDType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="ValidityDelimitedPeriod" type="ram:DelimitedPeriodType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MDRQueryType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="ID" type="udt:IDType" />
+      <xsd:element maxOccurs="1" minOccurs="1" name="SubmittedDateTime" type="udt:DateTimeType" />
+      <xsd:element maxOccurs="1" minOccurs="1" name="TypeCode" type="udt:CodeType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="ContractualLanguageCode" type="udt:CodeType" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="SubmitterFLUXParty" type="ram:FLUXPartyType" />
+      <xsd:element maxOccurs="1" minOccurs="1" name="SubjectMDRQueryIdentity" type="ram:MDRQueryIdentityType" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
