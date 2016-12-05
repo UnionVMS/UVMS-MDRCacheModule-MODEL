@@ -16,7 +16,8 @@
 
 	<xs:simpleType name="MdrModuleMethod">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="GET_FLUX_MDR_ENTITY" />
+			<xs:enumeration value="GET_MDR_CODE_LIST" />
+			<xs:enumeration value="SYNC_MDR_CODE_LIST" />
 		</xs:restriction>
 	</xs:simpleType>
 
