@@ -116,7 +116,7 @@
                                     <bindingExcludes>
                                         <include>**/*.xj</include>
                                     </bindingExcludes>
-                                    <schemaDirectory>${project.basedir}/src/main/resources/contract/query</schemaDirectory>
+                                    <schemaDirectory>../../activity-trunk/model-mdr/src/main/resources/contract/mdr/query</schemaDirectory>
                                     <generatePackage>un.unece.uncefact.data.standard.query</generatePackage>
                                     <generateDirectory>${project.build.directory}/generated-sources/mdr-query</generateDirectory>
                                     <extension>true</extension>
@@ -172,7 +172,7 @@
                                     <bindingExcludes>
                                         <include>**/*.xj</include>
                                     </bindingExcludes>
-                                    <schemaDirectory>${project.basedir}/src/main/resources/contract/response</schemaDirectory>
+                                    <schemaDirectory>../../activity-trunk/model-mdr/src/main/resources/contract/mdr/response</schemaDirectory>
                                     <generatePackage>un.unece.uncefact.data.standard.response</generatePackage>
                                     <generateDirectory>${project.build.directory}/generated-sources/mdr-response</generateDirectory>
                                     <extension>true</extension>
@@ -228,7 +228,7 @@
                                     <bindingExcludes>
                                         <include>**/*.xj</include>
                                     </bindingExcludes>
-                                    <schemaDirectory>${project.basedir}/src/main/resources/contract/communication</schemaDirectory>
+                                    <schemaDirectory>src/main/resources/contract/mdr/communication</schemaDirectory>
                                     <generatePackage>un.unece.uncefact.data.standard.communication</generatePackage>
                                     <generateDirectory>${project.build.directory}/generated-sources/communication</generateDirectory>
                                     <extension>true</extension>
