@@ -116,8 +116,8 @@
                                     <bindingExcludes>
                                         <include>**/*.xj</include>
                                     </bindingExcludes>
-                                    <schemaDirectory>../../activity-trunk/model-mdr/src/main/resources/contract/mdr/query</schemaDirectory>
-                                    <generatePackage>un.unece.uncefact.data.standard.query</generatePackage>
+                                    <schemaDirectory>src/main/resources/contract/mdr/query</schemaDirectory>
+                                    <generatePackage>un.unece.uncefact.data.standard.mdr.query</generatePackage>
                                     <generateDirectory>${project.build.directory}/generated-sources/mdr-query</generateDirectory>
                                     <extension>true</extension>
                                     <args>
@@ -172,8 +172,8 @@
                                     <bindingExcludes>
                                         <include>**/*.xj</include>
                                     </bindingExcludes>
-                                    <schemaDirectory>../../activity-trunk/model-mdr/src/main/resources/contract/mdr/response</schemaDirectory>
-                                    <generatePackage>un.unece.uncefact.data.standard.response</generatePackage>
+                                    <schemaDirectory>src/main/resources/contract/mdr/response</schemaDirectory>
+                                    <generatePackage>un.unece.uncefact.data.standard.mdr.response</generatePackage>
                                     <generateDirectory>${project.build.directory}/generated-sources/mdr-response</generateDirectory>
                                     <extension>true</extension>
                                     <args>
@@ -229,7 +229,7 @@
                                         <include>**/*.xj</include>
                                     </bindingExcludes>
                                     <schemaDirectory>src/main/resources/contract/mdr/communication</schemaDirectory>
-                                    <generatePackage>un.unece.uncefact.data.standard.communication</generatePackage>
+                                    <generatePackage>un.unece.uncefact.data.standard.mdr.communication</generatePackage>
                                     <generateDirectory>${project.build.directory}/generated-sources/communication</generateDirectory>
                                     <extension>true</extension>
                                     <args>

@@ -11,8 +11,8 @@ details. You should have received a copy of the GNU General Public License along
 package eu.europa.ec.fisheries.uvms.mdr.model.mapper;
 
 import eu.europa.ec.fisheries.uvms.mdr.model.exception.MdrModelMarshallException;
-import un.unece.uncefact.data.standard.communication.MdrModuleMethod;
-import un.unece.uncefact.data.standard.communication.SetFLUXMDRSyncMessageResponse;
+import un.unece.uncefact.data.standard.mdr.communication.MdrModuleMethod;
+import un.unece.uncefact.data.standard.mdr.communication.SetFLUXMDRSyncMessageResponse;
 
 /**
  * Created by kovian on 06/12/2016.
