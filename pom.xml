@@ -108,7 +108,7 @@
             </distributionManagement>
 
             <properties>
-                <scm.connection>scm:git:https://emserveje@webgate.ec.europa.eu/CITnet/stash/scm/unionvms/uvms-activity-model-mdr.git</scm.connection>
+                <scm.connection>scm:git:https://emserveje@webgate.ec.europa.eu/CITnet/stash/scm/unionvms/uvms-mdrmodule-model.git</scm.connection>
             </properties>
 
         </profile>
