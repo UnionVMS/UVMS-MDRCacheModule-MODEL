@@ -18,6 +18,7 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="GET_MDR_CODE_LIST" />
 			<xs:enumeration value="SYNC_MDR_CODE_LIST" />
+			<xs:enumeration value="MDR_CODE_LIST_RESP" />
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -56,5 +57,14 @@
 			<xsd:enumeration value="MANUAL"/>
 		</xsd:restriction>
 	</xsd:simpleType>
+
+	<xs:complexType name="MdrGetCodeListRequest" abstract="true">
+		<xs:sequence>
+			<xs:element name="acronym" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
+			<xs:element name="filter" type="xsd:string" default="*" />
+			<xs:element name="columnsToFilter" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="wantedNomberOfResults" type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
 
 </xs:schema>

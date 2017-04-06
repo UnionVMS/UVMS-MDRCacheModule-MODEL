@@ -12,6 +12,7 @@ package eu.europa.ec.fisheries.uvms.mdr.model.mapper;
 
 import eu.europa.ec.fisheries.uvms.mdr.model.exception.MdrModelMarshallException;
 import un.unece.uncefact.data.standard.mdr.communication.MdrModuleMethod;
+import un.unece.uncefact.data.standard.mdr.communication.SetFLUXMDRSyncMessageRequest;
 import un.unece.uncefact.data.standard.mdr.communication.SetFLUXMDRSyncMessageResponse;
 
 /**
@@ -19,7 +20,14 @@ import un.unece.uncefact.data.standard.mdr.communication.SetFLUXMDRSyncMessageRe
  */
 public class MdrModuleMapper {
 
-    public static String createFluxMdrSyncEntityRequest(String request, String empty) throws MdrModelMarshallException {
+    public static String createFluxMdrSyncEntityRequest(String request) throws MdrModelMarshallException {
+        SetFLUXMDRSyncMessageRequest response = new SetFLUXMDRSyncMessageRequest();
+        response.setMethod(MdrModuleMethod.SYNC_MDR_CODE_LIST);
+        response.setRequest(request);
+        return JAXBMarshaller.marshallJaxBObjectToString(response);
+    }
+
+    public static String createFluxMdrSyncEntityResponse(String request) throws MdrModelMarshallException {
         SetFLUXMDRSyncMessageResponse response = new SetFLUXMDRSyncMessageResponse();
         response.setMethod(MdrModuleMethod.SYNC_MDR_CODE_LIST);
         response.setRequest(request);
