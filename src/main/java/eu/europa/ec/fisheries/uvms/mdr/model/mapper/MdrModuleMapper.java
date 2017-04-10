@@ -41,7 +41,8 @@ public class MdrModuleMapper {
         request.setAcronym(acronym);
         request.setFilter(filter);
         request.setColumnsToFilters(columns);
-        request.setWantedNumberOfResults(BigInteger.valueOf(nrOfResults));
+        BigInteger ndrOfRes = nrOfResults != null ? BigInteger.valueOf(nrOfResults) : null;
+        request.setWantedNumberOfResults(ndrOfRes);
         request.setMethod(MdrModuleMethod.GET_MDR_CODE_LIST);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
@@ -65,5 +66,6 @@ public class MdrModuleMapper {
         response.setDataSets(null);
         return JAXBMarshaller.marshallJaxBObjectToString(response);
     }
+
 
 }
