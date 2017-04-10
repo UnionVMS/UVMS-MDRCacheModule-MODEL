@@ -46,7 +46,6 @@
 		</xs:complexType>
 	</xs:element>
 
-
 	<xsd:simpleType name="PluginType">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="EMAIL"/>
@@ -58,12 +57,50 @@
 		</xsd:restriction>
 	</xsd:simpleType>
 
-	<xs:complexType name="MdrGetCodeListRequest" abstract="true">
+	<xsd:simpleType name="ValidationResultType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="OK"/>
+			<xsd:enumeration value="NOK"/>
+			<xsd:enumeration value="WOK"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xs:complexType name="MdrGetCodeListRequest">
 		<xs:sequence>
 			<xs:element name="acronym" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
 			<xs:element name="filter" type="xsd:string" default="*" />
 			<xs:element name="columnsToFilter" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="wantedNomberOfResults" type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1" />
+			<xs:element name="wantedNumberOfResults" type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1" />
+			<xs:element name="method" type="MdrModuleMethod" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MdrGetCodeListResponse">
+		<xs:sequence>
+			<xs:element name="acronym" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
+			<xs:element name="dataSet" type="ObjectRepresentation" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="validation" type="ValidationResult" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ValidationResult">
+		<xs:sequence>
+			<xs:element name="valid" type="ValidationResultType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="message" type="xsd:string" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ObjectRepresentation">
+		<xs:sequence>
+			<xs:element name="field" type="ColumnDataType" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ColumnDataType">
+		<xs:sequence>
+			<xs:element name="columnName" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xs:element name="columnValue" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xs:element name="columnDataType" type="xsd:string" minOccurs="0" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 
