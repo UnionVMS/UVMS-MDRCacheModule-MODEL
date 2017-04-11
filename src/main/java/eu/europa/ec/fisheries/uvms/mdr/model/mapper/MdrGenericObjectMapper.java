@@ -16,6 +16,7 @@ import un.unece.uncefact.data.standard.mdr.communication.ColumnDataType;
 import un.unece.uncefact.data.standard.mdr.communication.ObjectRepresentation;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,6 +74,10 @@ public class MdrGenericObjectMapper {
             List<Map<Map<String, String>, String>> singleObject = new ArrayList<>();
             for (Field field : declaredFields) {
                 // Reflectively read attribute Name, Value and Type
+                // We don't want constants to be included here.
+                if(fieldIsConstant(field)){
+                    continue;
+                }
                 String fieldName   = field.getName();
                 Class<?> fieldType = field.getType();
                 field.setAccessible(true);
@@ -91,6 +96,13 @@ public class MdrGenericObjectMapper {
             rows.add(singleObject);
         }
         return rows;
+    }
+
+    private static boolean fieldIsConstant(Field field) {
+        if(Modifier.isStatic(field.getModifiers())){
+            return true;
+        }
+        return false;
     }
 
     private static Field[] getFieldsIncludingEnherited(Class<?> entityClass) {

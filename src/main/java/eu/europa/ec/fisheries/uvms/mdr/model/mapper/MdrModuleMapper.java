@@ -41,7 +41,8 @@ public class MdrModuleMapper {
         request.setAcronym(acronym);
         request.setFilter(filter);
         request.setColumnsToFilters(columns);
-        request.setWantedNumberOfResults(BigInteger.valueOf(nrOfResults));
+        BigInteger ndrOfRes = nrOfResults != null ? BigInteger.valueOf(nrOfResults) : null;
+        request.setWantedNumberOfResults(ndrOfRes);
         request.setMethod(MdrModuleMethod.GET_MDR_CODE_LIST);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
@@ -55,6 +56,7 @@ public class MdrModuleMapper {
             objectRepresentations = MdrGenericObjectMapper.mapToGenericObjectRepresentation(codelistList);
         }
         response.setDataSets(objectRepresentations);
+        response.setMethod(MdrModuleMethod.MDR_CODE_LIST_RESP);
         return JAXBMarshaller.marshallJaxBObjectToString(response);
     }
 
@@ -63,7 +65,9 @@ public class MdrModuleMapper {
         response.setAcronym(null);
         response.setValidation(new ValidationResult(ValidationResultType.NOK, errorMessage));
         response.setDataSets(null);
+        response.setMethod(MdrModuleMethod.MDR_CODE_LIST_RESP);
         return JAXBMarshaller.marshallJaxBObjectToString(response);
     }
+
 
 }
