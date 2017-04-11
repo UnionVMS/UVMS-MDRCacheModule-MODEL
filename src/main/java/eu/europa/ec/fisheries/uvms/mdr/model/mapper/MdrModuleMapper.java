@@ -56,6 +56,7 @@ public class MdrModuleMapper {
             objectRepresentations = MdrGenericObjectMapper.mapToGenericObjectRepresentation(codelistList);
         }
         response.setDataSets(objectRepresentations);
+        response.setMethod(MdrModuleMethod.MDR_CODE_LIST_RESP);
         return JAXBMarshaller.marshallJaxBObjectToString(response);
     }
 
@@ -64,6 +65,7 @@ public class MdrModuleMapper {
         response.setAcronym(null);
         response.setValidation(new ValidationResult(ValidationResultType.NOK, errorMessage));
         response.setDataSets(null);
+        response.setMethod(MdrModuleMethod.MDR_CODE_LIST_RESP);
         return JAXBMarshaller.marshallJaxBObjectToString(response);
     }
 

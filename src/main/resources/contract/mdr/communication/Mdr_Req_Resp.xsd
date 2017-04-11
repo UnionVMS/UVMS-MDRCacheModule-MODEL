@@ -22,6 +22,17 @@
 		</xs:restriction>
 	</xs:simpleType>
 
+	<xsd:simpleType name="PluginType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="EMAIL"/>
+			<xsd:enumeration value="SATELLITE_RECEIVER"/>
+			<xsd:enumeration value="FLUX"/>
+			<xsd:enumeration value="OTHER"/>
+			<xsd:enumeration value="NAF"/>
+			<xsd:enumeration value="MANUAL"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
 	<xs:element name="SetFLUXMDRSyncMessageRequest">
 		<xs:complexType>
 			<xs:complexContent>
@@ -46,16 +57,41 @@
 		</xs:complexType>
 	</xs:element>
 
-	<xsd:simpleType name="PluginType">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="EMAIL"/>
-			<xsd:enumeration value="SATELLITE_RECEIVER"/>
-			<xsd:enumeration value="FLUX"/>
-			<xsd:enumeration value="OTHER"/>
-			<xsd:enumeration value="NAF"/>
-			<xsd:enumeration value="MANUAL"/>
-		</xsd:restriction>
-	</xsd:simpleType>
+	<xs:element name="MdrGetCodeListRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="MdrModuleRequest">
+					<xs:sequence>
+						<xs:element name="acronym" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
+						<xs:element name="filter" type="xsd:string" default="*" />
+						<xs:element name="columnsToFilter" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element name="wantedNumberOfResults" type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1" />
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="MdrGetCodeListResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="MdrModuleRequest">
+					<xs:sequence>
+						<xs:element name="acronym" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
+						<xs:element name="dataSet" type="ObjectRepresentation" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element name="validation" type="ValidationResult" minOccurs="1" maxOccurs="1" />
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="ValidationResult">
+		<xs:sequence>
+			<xs:element name="valid" type="ValidationResultType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="message" type="xsd:string" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
 
 	<xsd:simpleType name="ValidationResultType">
 		<xsd:restriction base="xsd:string">
@@ -64,31 +100,6 @@
 			<xsd:enumeration value="WOK"/>
 		</xsd:restriction>
 	</xsd:simpleType>
-
-	<xs:complexType name="MdrGetCodeListRequest">
-		<xs:sequence>
-			<xs:element name="acronym" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
-			<xs:element name="filter" type="xsd:string" default="*" />
-			<xs:element name="columnsToFilter" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="wantedNumberOfResults" type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1" />
-			<xs:element name="method" type="MdrModuleMethod" minOccurs="1" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="MdrGetCodeListResponse">
-		<xs:sequence>
-			<xs:element name="acronym" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
-			<xs:element name="dataSet" type="ObjectRepresentation" minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="validation" type="ValidationResult" minOccurs="1" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="ValidationResult">
-		<xs:sequence>
-			<xs:element name="valid" type="ValidationResultType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="message" type="xsd:string" minOccurs="0" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
 
 	<xs:complexType name="ObjectRepresentation">
 		<xs:sequence>
