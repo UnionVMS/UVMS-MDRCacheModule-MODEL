@@ -26,6 +26,7 @@
             <xs:enumeration value="MANAGE_ADMIN_CONFIGURATIONS"/>
             <xs:enumeration value="CODE_LISTS_ENABLE_DISABLE_SCHEDULED_UPDATE"/>
             <xs:enumeration value="MDR_SEARCH_CODE_LIST_ITEMS"/>
+            <xs:enumeration value="MDR_LUCENE_REINDEX"/>
         </xs:restriction>
     </xs:simpleType>
 
