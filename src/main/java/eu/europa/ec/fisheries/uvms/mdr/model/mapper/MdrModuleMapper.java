@@ -10,13 +10,19 @@ details. You should have received a copy of the GNU General Public License along
 */
 package eu.europa.ec.fisheries.uvms.mdr.model.mapper;
 
+import java.math.BigInteger;
+import java.util.List;
+
 import eu.europa.ec.fisheries.uvms.mdr.model.exception.MdrModelMarshallException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import un.unece.uncefact.data.standard.mdr.communication.*;
-
-import java.math.BigInteger;
-import java.util.List;
+import un.unece.uncefact.data.standard.mdr.communication.MdrGetCodeListRequest;
+import un.unece.uncefact.data.standard.mdr.communication.MdrGetCodeListResponse;
+import un.unece.uncefact.data.standard.mdr.communication.MdrModuleMethod;
+import un.unece.uncefact.data.standard.mdr.communication.ObjectRepresentation;
+import un.unece.uncefact.data.standard.mdr.communication.SetFLUXMDRSyncMessageResponse;
+import un.unece.uncefact.data.standard.mdr.communication.ValidationResult;
+import un.unece.uncefact.data.standard.mdr.communication.ValidationResultType;
 
 /**
  * Created by kovian on 06/12/2016.
@@ -31,6 +37,10 @@ public class MdrModuleMapper {
         response.setMethod(MdrModuleMethod.SYNC_MDR_CODE_LIST);
         response.setRequest(request);
         return JAXBMarshaller.marshallJaxBObjectToString(response);
+    }
+
+    public static String createFluxMdrGetCodeListRequest(String acronym) throws MdrModelMarshallException {
+        return createFluxMdrGetCodeListRequest(acronym, null, null, null);
     }
 
     public static String createFluxMdrGetCodeListRequest(String acronym, String filter, List<String> columns, Integer nrOfResults) throws MdrModelMarshallException {
