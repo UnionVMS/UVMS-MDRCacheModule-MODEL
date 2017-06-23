@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>eu.europa.ec.fisheries.uvms.mdr</groupId>
     <artifactId>mdr-model</artifactId>
     <name>Mdr Model</name>
     <packaging>ejb</packaging>
-    <version>0.5.0-SNAPSHOT</version>
+    <version>0.5.1-SNAPSHOT</version>
     <description>This module shall have interfaces, XSD, and DTOs</description>
 
     <properties>
@@ -19,7 +20,27 @@
         <logback.core.version>1.1.2</logback.core.version>
 		<maven.release.plugin.version>2.5.2</maven.release.plugin.version>
         <maven.scm.provider.version>2.1.1</maven.scm.provider.version>
+
+		<scm.connection>scm:git:https://github.com/UnionVMS/UVMS-MDRCacheModule-MODEL.git</scm.connection>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>focus-releases</id>
+            <name>UnionVms Repository</name>
+            <url>http://nexus.focus.fish/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>focus-snapshots</id>
+            <name>UnionVms Snapshot Repository</name>
+            <url>http://nexus.focus.fish/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+	<scm>
+		<connection>${scm.connection}</connection>
+		<tag>HEAD</tag>
+	</scm>
 
     <dependencies>
 
@@ -61,6 +82,12 @@
         </dependency>
 
         <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${sl4j.version}</version>
@@ -68,26 +95,40 @@
 
     </dependencies>
 
-    <distributionManagement>
-        <repository>
-            <id>digit-releases</id>
-            <name>DG DIGIT Repository</name>
-            <url>https://webgate.ec.europa.eu/CITnet/nexus/content/repositories/mare/</url>
-        </repository>
-        <snapshotRepository>
-            <id>digit-snapshots</id>
-            <name>DG DIGIT Snapshot Repository</name>
-            <url>https://webgate.ec.europa.eu/CITnet/nexus/content/repositories/mare-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-	<scm>
-	 <connection>scm:git:https://emkoviand@webgate.ec.europa.eu/CITnet/stash/scm/unionvms/uvms-activity-model-mdr.git</connection>
-	 <developerConnection>scm:git:https://emkoviand@webgate.ec.europa.eu/CITnet/stash/scm/unionvms/uvms-activity-model-mdr.git</developerConnection>
-	 <url>https://emkoviand@webgate.ec.europa.eu/CITnet/stash/scm/unionvms/</url>
-	</scm>
 
     <profiles>
+
+        <profile>
+            <id>dg-mare</id>
+
+            <distributionManagement>
+                <repository>
+                    <id>digit-releases</id>
+                    <name>DG DIGIT Repository</name>
+                    <url>https://webgate.ec.europa.eu/CITnet/nexus/content/repositories/mare/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>digit-snapshots</id>
+                    <name>DG DIGIT Snapshot Repository</name>
+                    <url>https://webgate.ec.europa.eu/CITnet/nexus/content/repositories/mare-snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+
+            <properties>
+                <scm.connection>scm:git:https://emserveje@webgate.ec.europa.eu/CITnet/stash/scm/unionvms/uvms-mdrmodule-model.git</scm.connection>
+            </properties>
+
+        </profile>
+
+        <profile>
+            <id>doclint-java8-disable</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <javadoc.opts>-Xdoclint:none</javadoc.opts>
+            </properties>
+        </profile>
 
         <profile>
             <id>generate-from-wsdl</id>
@@ -116,8 +157,8 @@
                                     <bindingExcludes>
                                         <include>**/*.xj</include>
                                     </bindingExcludes>
-                                    <schemaDirectory>${project.basedir}/src/main/resources/contract/query</schemaDirectory>
-                                    <generatePackage>un.unece.uncefact.data.standard.query</generatePackage>
+                                    <schemaDirectory>src/main/resources/contract/mdr/query</schemaDirectory>
+                                    <generatePackage>un.unece.uncefact.data.standard.mdr.query</generatePackage>
                                     <generateDirectory>${project.build.directory}/generated-sources/mdr-query</generateDirectory>
                                     <extension>true</extension>
                                     <args>
@@ -172,8 +213,8 @@
                                     <bindingExcludes>
                                         <include>**/*.xj</include>
                                     </bindingExcludes>
-                                    <schemaDirectory>${project.basedir}/src/main/resources/contract/response</schemaDirectory>
-                                    <generatePackage>un.unece.uncefact.data.standard.response</generatePackage>
+                                    <schemaDirectory>src/main/resources/contract/mdr/response</schemaDirectory>
+                                    <generatePackage>un.unece.uncefact.data.standard.mdr.response</generatePackage>
                                     <generateDirectory>${project.build.directory}/generated-sources/mdr-response</generateDirectory>
                                     <extension>true</extension>
                                     <args>
@@ -228,8 +269,8 @@
                                     <bindingExcludes>
                                         <include>**/*.xj</include>
                                     </bindingExcludes>
-                                    <schemaDirectory>${project.basedir}/src/main/resources/contract/communication</schemaDirectory>
-                                    <generatePackage>un.unece.uncefact.data.standard.communication</generatePackage>
+                                    <schemaDirectory>src/main/resources/contract/mdr/communication</schemaDirectory>
+                                    <generatePackage>un.unece.uncefact.data.standard.mdr.communication</generatePackage>
                                     <generateDirectory>${project.build.directory}/generated-sources/communication</generateDirectory>
                                     <extension>true</extension>
                                     <args>
@@ -318,6 +359,22 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <additionalparam>${javadoc.opts}</additionalparam>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
