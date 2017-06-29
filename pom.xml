@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>eu.europa.ec.fisheries.uvms.mdr</groupId>
     <artifactId>mdr-model</artifactId>
     <name>Mdr Model</name>
     <packaging>ejb</packaging>
-    <version>0.5.1-SNAPSHOT</version>
+    <version>0.5.1</version>
     <description>This module shall have interfaces, XSD, and DTOs</description>
 
     <properties>
@@ -39,7 +38,7 @@
 
 	<scm>
 		<connection>${scm.connection}</connection>
-		<tag>HEAD</tag>
+		<tag>mdr-model-0.5.1</tag>
 	</scm>
 
     <dependencies>
