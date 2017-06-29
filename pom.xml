@@ -5,7 +5,7 @@
     <artifactId>mdr-model</artifactId>
     <name>Mdr Model</name>
     <packaging>ejb</packaging>
-    <version>0.5.1</version>
+    <version>0.5.2-SNAPSHOT</version>
     <description>This module shall have interfaces, XSD, and DTOs</description>
 
     <properties>
@@ -38,7 +38,7 @@
 
 	<scm>
 		<connection>${scm.connection}</connection>
-		<tag>mdr-model-0.5.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
     <dependencies>
