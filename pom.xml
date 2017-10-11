@@ -5,7 +5,7 @@
     <artifactId>mdr-model</artifactId>
     <name>Mdr Model</name>
     <packaging>ejb</packaging>
-    <version>0.5.2-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <description>This module shall have interfaces, XSD, and DTOs</description>
 
     <properties>
@@ -44,19 +44,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>${mockito.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>${javaee.version}</version>
@@ -93,7 +80,6 @@
         </dependency>
 
     </dependencies>
-
 
     <profiles>
 
