@@ -17,6 +17,7 @@
 	<xs:simpleType name="MdrModuleMethod">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="GET_MDR_CODE_LIST" />
+			<xs:enumeration value="GET_ALL_MDR_CODE_LIST" />
 			<xs:enumeration value="SYNC_MDR_CODE_LIST" />
 			<xs:enumeration value="MDR_CODE_LIST_RESP" />
 		</xs:restriction>
@@ -85,6 +86,22 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
+
+	<xs:element name="MdrGetAllCodeListsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="codeLists" type="SingleCodeListRappresentation" minOccurs="0" maxOccurs="unbounded" nillable="false" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="SingleCodeListRappresentation">
+		<xs:sequence>
+			<xs:element name="acronym" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
+			<xs:element name="dataSet" type="ObjectRepresentation" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="validation" type="ValidationResult" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
 
 	<xs:complexType name="ValidationResult">
 		<xs:sequence>
