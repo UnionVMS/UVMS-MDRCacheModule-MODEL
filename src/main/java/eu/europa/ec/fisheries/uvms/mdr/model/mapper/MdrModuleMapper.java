@@ -10,17 +10,18 @@ details. You should have received a copy of the GNU General Public License along
 */
 package eu.europa.ec.fisheries.uvms.mdr.model.mapper;
 
+import eu.europa.ec.fisheries.uvms.mdr.model.exception.MdrModelMarshallException;
 import java.math.BigInteger;
 import java.util.List;
-
-import eu.europa.ec.fisheries.uvms.mdr.model.exception.MdrModelMarshallException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import un.unece.uncefact.data.standard.mdr.communication.MdrGetAllCodeListsResponse;
 import un.unece.uncefact.data.standard.mdr.communication.MdrGetCodeListRequest;
 import un.unece.uncefact.data.standard.mdr.communication.MdrGetCodeListResponse;
 import un.unece.uncefact.data.standard.mdr.communication.MdrModuleMethod;
 import un.unece.uncefact.data.standard.mdr.communication.ObjectRepresentation;
 import un.unece.uncefact.data.standard.mdr.communication.SetFLUXMDRSyncMessageResponse;
+import un.unece.uncefact.data.standard.mdr.communication.SingleCodeListRappresentation;
 import un.unece.uncefact.data.standard.mdr.communication.ValidationResult;
 import un.unece.uncefact.data.standard.mdr.communication.ValidationResultType;
 
@@ -70,6 +71,18 @@ public class MdrModuleMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(response);
     }
 
+    public static SingleCodeListRappresentation mapToSingleCodeListRappresentation(List<?> codelistList, String acronym, ValidationResultType valid, String message) throws MdrModelMarshallException {
+        SingleCodeListRappresentation singleObjRappr = new SingleCodeListRappresentation();
+        singleObjRappr.setAcronym(acronym);
+        singleObjRappr.setValidation(new ValidationResult(valid, message));
+        List<ObjectRepresentation> objectRepresentations = null;
+        if (CollectionUtils.isNotEmpty(codelistList)) {
+            objectRepresentations = MdrGenericObjectMapper.mapToGenericObjectRepresentation(codelistList);
+        }
+        singleObjRappr.setDataSets(objectRepresentations);
+        return singleObjRappr;
+    }
+
     public static String createFluxMdrGetCodeListErrorResponse(String errorMessage) throws MdrModelMarshallException {
         MdrGetCodeListResponse response = new MdrGetCodeListResponse();
         response.setAcronym(null);
@@ -80,4 +93,15 @@ public class MdrModuleMapper {
     }
 
 
+    public static String mapToMdrGetAllCodeListsResponse(List<SingleCodeListRappresentation> rappr) throws MdrModelMarshallException {
+        MdrGetAllCodeListsResponse resp = new MdrGetAllCodeListsResponse();
+        resp.setCodeLists(rappr);
+        return JAXBMarshaller.marshallJaxBObjectToString(resp);
+    }
+
+    public static String createFluxMdrGetAllCodeListRequest() throws MdrModelMarshallException {
+        MdrGetCodeListRequest req = new MdrGetCodeListRequest();
+        req.setMethod(MdrModuleMethod.GET_ALL_MDR_CODE_LIST);
+        return JAXBMarshaller.marshallJaxBObjectToString(req);
+    }
 }
