@@ -20,8 +20,25 @@
 			<xs:enumeration value="GET_ALL_MDR_CODE_LIST" />
 			<xs:enumeration value="SYNC_MDR_CODE_LIST" />
 			<xs:enumeration value="MDR_CODE_LIST_RESP" />
+			<xs:enumeration value="GET_LAST_REFRESH_DATE" />
 		</xs:restriction>
 	</xs:simpleType>
+
+	<xs:element name="MdrGetLastRefreshDateRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="MdrModuleRequest" />
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="MdrGetLastRefreshDateResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="lastRefreshDate" type="xs:dateTime" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
 	<xsd:simpleType name="PluginType">
 		<xsd:restriction base="xsd:string">

@@ -12,18 +12,15 @@ package eu.europa.ec.fisheries.uvms.mdr.model.mapper;
 
 import eu.europa.ec.fisheries.uvms.mdr.model.exception.MdrModelMarshallException;
 import java.math.BigInteger;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import un.unece.uncefact.data.standard.mdr.communication.MdrGetAllCodeListsResponse;
-import un.unece.uncefact.data.standard.mdr.communication.MdrGetCodeListRequest;
-import un.unece.uncefact.data.standard.mdr.communication.MdrGetCodeListResponse;
-import un.unece.uncefact.data.standard.mdr.communication.MdrModuleMethod;
-import un.unece.uncefact.data.standard.mdr.communication.ObjectRepresentation;
-import un.unece.uncefact.data.standard.mdr.communication.SetFLUXMDRSyncMessageResponse;
-import un.unece.uncefact.data.standard.mdr.communication.SingleCodeListRappresentation;
-import un.unece.uncefact.data.standard.mdr.communication.ValidationResult;
-import un.unece.uncefact.data.standard.mdr.communication.ValidationResultType;
+import un.unece.uncefact.data.standard.mdr.communication.*;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 
 /**
  * Created by kovian on 06/12/2016.
@@ -39,6 +36,21 @@ public class MdrModuleMapper {
         response.setRequest(request);
         return JAXBMarshaller.marshallJaxBObjectToString(response);
     }
+
+    public static String createMdrGetLastRefreshDateRequest() throws MdrModelMarshallException {
+        MdrGetLastRefreshDateRequest mdrGetLastRefreshDateRequest = new MdrGetLastRefreshDateRequest();
+        mdrGetLastRefreshDateRequest.setMethod(MdrModuleMethod.GET_LAST_REFRESH_DATE);
+        return JAXBMarshaller.marshallJaxBObjectToString(mdrGetLastRefreshDateRequest);
+    }
+
+    public static String createMdrGetLastRefreshDateResponse(Date date) throws MdrModelMarshallException, DatatypeConfigurationException {
+        MdrGetLastRefreshDateResponse resp = new MdrGetLastRefreshDateResponse();
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(date);
+        resp.setLastRefreshDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+        return JAXBMarshaller.marshallJaxBObjectToString(resp);
+    }
+
 
     public static String createFluxMdrGetCodeListRequest(String acronym) throws MdrModelMarshallException {
         return createFluxMdrGetCodeListRequest(acronym, null, null, null);
