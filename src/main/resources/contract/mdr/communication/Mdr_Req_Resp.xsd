@@ -17,6 +17,7 @@
 	<xs:simpleType name="MdrModuleMethod">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="GET_MDR_CODE_LIST" />
+			<xs:enumeration value="GET_MDR_STATUS" />
 			<xs:enumeration value="GET_ALL_MDR_CODE_LIST" />
 			<xs:enumeration value="SYNC_MDR_CODE_LIST" />
 			<xs:enumeration value="MDR_CODE_LIST_RESP" />

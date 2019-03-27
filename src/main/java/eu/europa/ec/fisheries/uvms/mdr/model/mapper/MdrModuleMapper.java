@@ -83,6 +83,18 @@ public class MdrModuleMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(response);
     }
 
+    public static String createFluxMdrGetCodeListResponse(List<?> codelistList, ValidationResultType valid, String message) throws MdrModelMarshallException {
+        MdrGetCodeListResponse response = new MdrGetCodeListResponse();
+        response.setValidation(new ValidationResult(valid, message));
+        List<ObjectRepresentation> objectRepresentations = null;
+        if (CollectionUtils.isNotEmpty(codelistList)) {
+            objectRepresentations = MdrGenericObjectMapper.mapToGenericObjectRepresentation(codelistList);
+        }
+        response.setDataSets(objectRepresentations);
+        response.setMethod(MdrModuleMethod.MDR_CODE_LIST_RESP);
+        return JAXBMarshaller.marshallJaxBObjectToString(response);
+    }
+
     public static SingleCodeListRappresentation mapToSingleCodeListRappresentation(List<?> codelistList, String acronym, ValidationResultType valid, String message) throws MdrModelMarshallException {
         SingleCodeListRappresentation singleObjRappr = new SingleCodeListRappresentation();
         singleObjRappr.setAcronym(acronym);
@@ -114,6 +126,12 @@ public class MdrModuleMapper {
     public static String createFluxMdrGetAllCodeListRequest() throws MdrModelMarshallException {
         MdrGetCodeListRequest req = new MdrGetCodeListRequest();
         req.setMethod(MdrModuleMethod.GET_ALL_MDR_CODE_LIST);
+        return JAXBMarshaller.marshallJaxBObjectToString(req);
+    }
+
+    public static String createFluxMdrGetStatusesRequest() throws MdrModelMarshallException {
+        MdrGetCodeListRequest req = new MdrGetCodeListRequest();
+        req.setMethod(MdrModuleMethod.GET_MDR_STATUS);
         return JAXBMarshaller.marshallJaxBObjectToString(req);
     }
 }
