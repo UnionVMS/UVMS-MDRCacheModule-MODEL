@@ -4,7 +4,7 @@ pipeline {
 	  buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '2', numToKeepStr: '5')
 	  skipStagesAfterUnstable()
 	}
-	parameters { string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '') }
+
 	stages{
 		 stage('Clean repo') {
 			steps{
@@ -12,7 +12,7 @@ pipeline {
 		        // or artifacts that other modules of the project provide
 		        // these will be downloaded again from the repo making it explicit
 		        sh """
-		        find .repo -name '*SNAPSHOT' -exec rm -rf {} + \
+		        mkdir -p .repo && find .repo -name '*SNAPSHOT' -exec rm -rf {} + \
 			    && rm -rf .repo/repository/eu/europa/ec/fisheries \
 			    && rm -rf .repo/repository/eu/europa/ec/mare \
 			    && rm -rf .repo/repository/fish/focus
@@ -39,7 +39,7 @@ pipeline {
 		          mavenSettingsConfig: 'sword-settings',
 		          // use a local repo
 		          mavenLocalRepo: '.repo') {
-		          	sh 'mvn -Dclean -Pgenerate-from-wsdl deploy -DaltDeploymentRepository=swordnexus-repo-snapshot::default::http://nexus:8081/repository/unionvms-snapshots/'
+		          	sh 'mvn clean -Pgenerate-from-wsdl deploy -DaltDeploymentRepository=swordnexus-repo-snapshot::default::http://nexus:8081/repository/unionvms-snapshots/'
 		      	}
 	      	}
 	   	}
