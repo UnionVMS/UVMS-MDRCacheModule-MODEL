@@ -85,6 +85,11 @@
             <artifactId>slf4j-api</artifactId>
             <version>${sl4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>eu.europa.ec.fisheries.uvms.commons</groupId>
+            <artifactId>uvms-commons-xml</artifactId>
+            <version>${uvms.commonsLibrary.version}</version>
+        </dependency>
 
     </dependencies>
 
