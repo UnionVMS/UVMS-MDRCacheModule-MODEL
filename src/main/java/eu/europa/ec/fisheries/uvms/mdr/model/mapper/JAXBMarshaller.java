@@ -63,8 +63,7 @@ public class JAXBMarshaller {
             LOG.debug("StringWriter time: {}", (System.currentTimeMillis() - before));
             return marshalled;
         } catch (JAXBException ex) {
-            LOG.error("[ Error when marshalling object to string ] {} ", ex.getMessage());
-            throw new MdrModelMarshallException("[ Error when marshalling Object to String ]", ex);
+            throw new MdrModelMarshallException("Error when marshalling Object to String", ex);
         }
     }
 
@@ -97,8 +96,7 @@ public class JAXBMarshaller {
             LOG.debug("Unmarshalling time: {}", (System.currentTimeMillis() - before));
             return object;
         } catch (NullPointerException | JMSException | JAXBException ex) {
-            //LOG.error("[ Error when marshalling Text message to object ] {} ", ex.getMessage());
-            throw new MdrModelMarshallException("[Error when unmarshalling response in ResponseMapper ]", ex);
+            throw new MdrModelMarshallException("Error when unmarshalling response in ResponseMapper", ex);
         }
     }
 
@@ -121,8 +119,7 @@ public class JAXBMarshaller {
             LOG.debug("Unmarshalling time: {}", (System.currentTimeMillis() - before));
             return object;
         } catch (NullPointerException | JAXBException ex) {
-            //LOG.error("[ Error when marshalling Text message to object ] {} ", ex.getMessage());
-            throw new MdrModelMarshallException("[Error when unmarshalling response in ResponseMapper ]", ex);
+            throw new MdrModelMarshallException("Error when unmarshalling response in ResponseMapper", ex);
         }
     }
 

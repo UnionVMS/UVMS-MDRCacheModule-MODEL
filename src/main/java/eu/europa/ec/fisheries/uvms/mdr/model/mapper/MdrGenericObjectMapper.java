@@ -12,6 +12,8 @@ package eu.europa.ec.fisheries.uvms.mdr.model.mapper;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import un.unece.uncefact.data.standard.mdr.communication.ColumnDataType;
 import un.unece.uncefact.data.standard.mdr.communication.ObjectRepresentation;
 
@@ -31,6 +33,7 @@ import java.util.Map;
  */
 public class MdrGenericObjectMapper {
 
+    final static Logger LOG = LoggerFactory.getLogger(MdrGenericObjectMapper.class);
 
     public static List<ObjectRepresentation> mapToGenericObjectRepresentation(List<?> list){
         return mapToObjects(mapToJavaObjectsRepresentation(list));
@@ -85,7 +88,7 @@ public class MdrGenericObjectMapper {
                 try {
                     fieldValue = field.get(entity);
                 } catch (IllegalArgumentException | IllegalAccessException e) {
-                    e.printStackTrace();
+                   LOG.error("Could not retrieve fieldValue for entity: " + entity,e);
                 }
                 Map<Map<String, String>, String> fieldNameValType = new HashMap<>();
                 Map<String, String> fieldNameVal = new HashMap<>();
