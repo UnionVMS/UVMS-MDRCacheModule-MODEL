@@ -17,7 +17,7 @@
     <description>This module shall have interfaces, XSD, and DTOs</description>
 
     <properties>
-        <javaee.version>7.0</javaee.version>
+        <javaee.version>8.0</javaee.version>
         <junit.version>4.12</junit.version>
         <jaxb2.version>0.9.4</jaxb2.version>
         <mapstruct.version>1.1.0.Final</mapstruct.version>
