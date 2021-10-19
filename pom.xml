@@ -313,9 +313,8 @@
         <profile>
             <id>enforce-jdk-version</id>
             <activation>
-                <!-- To disable profile, define property -Dfocus-pom.enforce.jdk.version.disabled=true -->
                 <property>
-                    <name>!focus-pom.enforce.jdk.version.disabled</name>
+                    <name>focus-pom.enforce.jdk.version.enabled</name>
                 </property>
             </activation>
             <build>
